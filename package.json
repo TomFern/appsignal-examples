@@ -1,0 +1,23 @@
+{
+  "name": "appsignal-webpack-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack serve"
+  },
+  "devDependencies": {
+    "@appsignal/webpack": "^1.0.0-beta.0",
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@webpack-cli/serve": "^0.1.8",
+    "babel-loader": "^8.0.6",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "dependencies": {
+    "@appsignal/javascript": "^1.0.0-beta.7"
+  }
+}
