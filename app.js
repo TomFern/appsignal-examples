@@ -1,5 +1,5 @@
 const { appsignal } = require("./appsignal")
-const { expressMiddleware } = require("@appsignal/express")
+const { expressMiddleware, expressErrorHandler } = require("@appsignal/express")
 const createError = require("http-errors")
 const express = require("express")
 const path = require("path")
@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, "public")))
 app.use(expressMiddleware(appsignal))
 
 /* GET home page. */
-app.post("/", function(req, res) {
+app.get("/", function(req, res) {
   res.json({
     response: "ok"
   })
@@ -39,14 +39,6 @@ app.use(function(req, res, next) {
 })
 
 // error handler
-app.use(function(err, req, res) {
-  // set locals, only providing error in development
-  res.locals.message = err.message
-  res.locals.error = req.app.get("env") === "development" ? err : {}
-
-  // render the error page
-  res.status(err.status || 500)
-  res.render("error")
-})
+app.use(expressErrorHandler(appsignal))
 
 module.exports = app

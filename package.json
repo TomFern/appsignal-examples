@@ -7,8 +7,8 @@
     "start:debug": "DEBUG=appsignal-examples:* nodemon ./bin/www"
   },
   "dependencies": {
-    "@appsignal/express": "^0.1.0-alpha.4",
-    "@appsignal/nodejs": "^0.1.0-alpha.8",
+    "@appsignal/express": "^0.1.0",
+    "@appsignal/nodejs": "^0.1.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
