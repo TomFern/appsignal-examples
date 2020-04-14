@@ -31,8 +31,10 @@ app.use(function(req, res, next) {
   const tracer = appsignal.tracer()
   const span = tracer.currentSpan()
 
-  tracer.withSpan(span.child("async_nested"), child => {
-    child.close()
+  tracer.withSpan(span.child(), child => {
+    child
+      .setName("async_nested")
+      .close()
   })
 
   next(createError(404))
