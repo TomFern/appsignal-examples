@@ -21,6 +21,28 @@ app.use(expressMiddleware(appsignal))
 
 /* GET home page. */
 app.get("/", function(req, res) {
+  appsignal.metrics().incrementCounter("visit", 1)
+
+  const tracer = appsignal.tracer()
+  const span = tracer.currentSpan()
+
+  tracer.withSpan(span.child(), child => {
+    child
+      .setName("Child span name")
+      .setCategory("name.child_category")
+      .setSQL("SELECT * FROM BLA WHERE user=1");
+
+    tracer.withSpan(child.child(), deeper => {
+      deeper
+        .setName("Child child span name")
+        .setCategory("deeper.child_category")
+        .setSQL("SELECT * FROM AAA WHERE user=1")
+        .close()
+    })
+
+    child.close();
+  })
+
   res.json({
     response: "ok"
   })
